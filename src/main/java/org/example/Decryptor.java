@@ -3,22 +3,22 @@ package org.example;
 import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 
-public class Sender implements Runnable{
-    private final BlockingQueue<byte[]> queueForProducing;
+public class Decryptor implements Runnable {
+    private final BlockingQueue<Message> queueForProducing;
     private final BlockingQueue<byte[]> queueForConsuming;
 
     private final byte[] poisonPillForConsuming;
-    private final byte[] poisonPillForProducing;
+    private final Message poisonPillForProducing;
 
-    public Sender(BlockingQueue<byte[]> queueForConsuming, BlockingQueue<byte[]> queueForProducing, byte[] poisonPillForConsuming, byte[] poisonPillForProducing) {
+    public Decryptor(BlockingQueue<byte[]> queueForConsuming, BlockingQueue<Message> queueForProducing, byte[] poisonPillForConsuming, Message poisonPillForProducing) {
         this.queueForProducing = queueForProducing;
         this.queueForConsuming = queueForConsuming;
         this.poisonPillForConsuming = poisonPillForConsuming;
         this.poisonPillForProducing = poisonPillForProducing;
     }
 
-    void sendMessage(byte[] message) throws InterruptedException {
-        queueForProducing.put(message);
+    Message decrypt(byte[] message) throws Exception {
+        return new Packet(message).getBMsq();
     }
 
     @Override
@@ -31,10 +31,13 @@ public class Sender implements Runnable{
                     return;
                 }
 
-                sendMessage(message);
+                Message decryptedMessage = decrypt(message);
+                queueForProducing.put(decryptedMessage);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

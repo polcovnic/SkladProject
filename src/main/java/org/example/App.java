@@ -7,6 +7,8 @@ package org.example;
 public class App
 {
     public static void main( String[] args ) throws Exception {
-        System.out.println("Practice 1");
+        System.out.println("Homework 2");
+
+
     }
 }
