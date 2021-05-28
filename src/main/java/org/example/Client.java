@@ -28,7 +28,7 @@ public class Client {
 
     }
 
-    void listen() {
+    void start() {
         numberOfThreads = Runtime.getRuntime().availableProcessors();
 
         for (int i = 0; i < numberOfThreads; i++) {

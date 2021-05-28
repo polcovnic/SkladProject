@@ -2,7 +2,6 @@ package org.example;
 
 import static org.junit.Assert.assertTrue;
 
-import com.google.common.primitives.UnsignedLong;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +15,7 @@ public class AppTest {
     @Test
     public void testMultithreadedMessageSending() {
         Client client = new Client();
-        client.listen();
+        client.start();
 
         int numberOfThreads = Runtime.getRuntime().availableProcessors();
         for (int i = 0; i < numberOfThreads; i++) {
