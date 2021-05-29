@@ -1,5 +1,7 @@
 package org.example;
 
+import java.io.IOException;
+
 /**
  * Hello world!
  *
@@ -7,8 +9,6 @@ package org.example;
 public class App
 {
     public static void main( String[] args ) throws Exception {
-        System.out.println("Homework 2");
-
-
+        System.out.println("Practice 3");
     }
 }

@@ -15,7 +15,9 @@ public class Message {
     private Integer bUserId;
     private String message;
 
-    private static final int BytesWithoutMessage = Integer.BYTES * 2;
+    public static final int BYTES_WITHOUT_MESSAGE = Integer.BYTES * 2;
+    public static final int MAX_MESSAGE_SIZE = 255;
+    public static final int BYTES_MAX_SIZE = BYTES_WITHOUT_MESSAGE + MAX_MESSAGE_SIZE;
 
     private static final String ALGORITHM = "AES";
     private static final byte[] keyValue = "ADBSJHJS12547896".getBytes();
@@ -38,7 +40,7 @@ public class Message {
     }
 
     public int getMessageBytesLength() {
-        return BytesWithoutMessage + getMessageBytes();
+        return BYTES_WITHOUT_MESSAGE + getMessageBytes();
     }
 
     public int getMessageBytes() {

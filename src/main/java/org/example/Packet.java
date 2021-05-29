@@ -9,6 +9,9 @@ import java.nio.ByteBuffer;
 @Data
 public class Packet {
     private final static Byte bMagic = 0x13;
+    private final static Integer packetFirstPartLength = bMagic.BYTES + Byte.BYTES + Long.BYTES + Integer.BYTES;
+    private final static Integer packetFirstPartLengthWithCRC16 = packetFirstPartLength + Short.BYTES;
+    public final static int packetMaxSize = packetFirstPartLengthWithCRC16 + Message.BYTES_MAX_SIZE;
 
     private Byte bSrc;
     private UnsignedLong bPktId;
