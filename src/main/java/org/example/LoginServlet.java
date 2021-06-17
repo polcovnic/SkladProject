@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -24,7 +25,10 @@ public class LoginServlet extends HttpServlet {
         String login = jsonMap.get("login");
         String password = jsonMap.get("password");
         if (login.equals("log") && password.equals("pass")) {
-            resp.getWriter().println(JWT.createJWT("1", "issue", login, 1000000));
+            Map<String, String> responseJsonMap = new HashMap<>();
+            responseJsonMap.put("JWT", JWT.createJWT("1", "issue", login, 1000000));
+            String responseJson = new ObjectMapper().writeValueAsString(responseJsonMap);
+            resp.getWriter().println(responseJson);
             resp.setStatus(200);
         } else {
             resp.setStatus(401);

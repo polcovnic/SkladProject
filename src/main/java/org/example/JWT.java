@@ -14,6 +14,7 @@ import java.util.Date;
 
 public class JWT {
     private static final String SECRET_KEY = "4pE8z3PBoHjnV1AhvGk+e8h2p+ShZpOnpr8cwHmMh1w=";
+    private static String lastJwt;
 
     //Sample method to construct a JWT
     public static String createJWT(String id, String issuer, String subject, long ttlMillis) {
@@ -43,7 +44,7 @@ public class JWT {
         }
 
         //Builds the JWT and serializes it to a compact, URL-safe string
-        return builder.compact();
+        return lastJwt = builder.compact();
     }
 
     private static void parseJWT(String jwt) {
@@ -62,23 +63,12 @@ public class JWT {
                     .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
                     .parseClaimsJws(jwt).getBody();
         } catch (ExpiredJwtException e) {
-            e.printStackTrace();
             return false;
         } catch (UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException e) {
             e.printStackTrace();
-            throw e;
+            return false;
         }
-        return true;
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        JWT jwt = new JWT();
-        String token = jwt.createJWT("1", "issue", "sub", 5000);
-        System.out.println(token);
-        for (int i = 0; i < 5; i++) {
-            Thread.sleep(1000);
-            jwt.parseJWT(token);
-        }
-
+        if (lastJwt == null) return true;
+        return lastJwt.equals(jwt);
     }
 }

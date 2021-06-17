@@ -15,8 +15,4 @@ public class MD5 {
         BigInteger bigInt = new BigInteger(1, digest);
         return bigInt.toString(16);
     }
-
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-
-    }
 }

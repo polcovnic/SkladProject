@@ -10,8 +10,7 @@ public class DB {
     public static void connect(){
         String url = "jdbc:sqlite:" + Main.dbName;
         try {
-            connection = DriverManager.getConnection(url);
-            System.out.println("Connected to a database");
+                connection = DriverManager.getConnection(url);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -20,7 +19,6 @@ public class DB {
     public static void close(){
         try {
             connection.close();
-            System.out.println("Connection closed");
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,8 +1,6 @@
 package org.example;
 
-import org.sqlite.core.DB;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -26,7 +24,8 @@ public class Main {
         System.out.println(resultSetName + ":");
         try {
             while (resultSet.next()){
-                System.out.println(resultSet.getInt("id") + "\t" + resultSet.getString("name") +
+                System.out.println(resultSet.getInt("id") + "\t" +
+                        resultSet.getString("name") +
                         "\t" + resultSet.getString("description") +
                         "\t" + resultSet.getString("producer") +
                         "\t" + resultSet.getInt("amount"));

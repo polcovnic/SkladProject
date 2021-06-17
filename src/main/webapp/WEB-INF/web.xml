@@ -19,4 +19,7 @@
         <servlet-name>good-servlet</servlet-name>
         <url-pattern>/api/good/*</url-pattern>
     </servlet-mapping>
+    <listener>
+        <listener-class>org.example.DBListener</listener-class>
+    </listener>
 </web-app>
