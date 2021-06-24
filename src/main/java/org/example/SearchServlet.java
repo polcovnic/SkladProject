@@ -12,8 +12,12 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class SearchServlet extends HttpServlet {
+    protected void corsSetup(HttpServletResponse resp) {
+        resp.addHeader("Access-Control-Allow-Origin", "http://localhost");
+    }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        corsSetup(resp);
         String query = req.getParameter("request");
         Map<String, List<Map<String, Object>>> responseJsonMap = new HashMap<>();
         Map<Integer, List<Map<String, Object>>> items = new HashMap<>();

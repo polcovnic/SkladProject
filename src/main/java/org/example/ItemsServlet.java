@@ -38,7 +38,9 @@ public class ItemsServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().println(responseJson);
     }
-
+    protected void corsSetup(HttpServletResponse resp) {
+        resp.addHeader("Access-Control-Allow-Origin", "http://localhost");
+    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String jsonData = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
@@ -51,7 +53,7 @@ public class ItemsServlet extends HttpServlet {
         String label = (String) jsonMap.get("label");
         int groupId = (int) jsonMap.get("groupId");
         if (groupId < 0) {
-            resp.setStatus(409);
+            resp.setStatus(400);
             return;
         }
         int id = ItemsTable.insert(name, description, manufacturer, price, quantity, label, groupId);
@@ -126,6 +128,7 @@ public class ItemsServlet extends HttpServlet {
 
     @Override
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        corsSetup(resp);
         if (req.getMethod().equalsIgnoreCase("PATCH")) {
             doPatch(req, resp);
         } else {

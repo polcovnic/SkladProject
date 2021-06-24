@@ -19,6 +19,10 @@ import java.util.stream.Collectors;
 
 public class GroupsServlet extends HttpServlet {
 
+    protected void corsSetup(HttpServletResponse resp) {
+        resp.addHeader("Access-Control-Allow-Origin", "http://localhost");
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idStr;
@@ -159,6 +163,7 @@ public class GroupsServlet extends HttpServlet {
 
     @Override
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        corsSetup(resp);
         if (req.getMethod().equalsIgnoreCase("PATCH")) {
             doPatch(req, resp);
         } else {
