@@ -1,6 +1,4 @@
-org\example\MD5.class
 org\example\Main.class
-org\example\LoginServlet.class
+org\example\SearchServlet.class
 org\example\DBListener.class
-org\example\MainServlet.class
 org\example\Table.class

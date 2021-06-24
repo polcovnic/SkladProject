@@ -12,9 +12,8 @@ public class Main {
     public static void main( String[] args ) throws Exception {
         DB.connect();
         Table.create();
-//        Table.update(2, "setString", "Musical instrument", "Yamaha", 15);
-//        Table.insert("Guitar", "Stringed musical instrument", "Cort", 18);
-        printResultSet("One", Objects.requireNonNull(Table.selectByName("Guitar")));
+        Table.insert("Guitar", "Stringed musical instrument", "Cort", 18);
+        Table.insert("Piano", "Keys", "Producer", 50);
         printResultSet("Set", Objects.requireNonNull(Table.selectAll()));
         Table.truncate();
         DB.close();

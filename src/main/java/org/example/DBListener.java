@@ -13,7 +13,8 @@ public class DBListener implements javax.servlet.ServletContextListener {
             e.printStackTrace();
         }
         DB.connect();
-        Table.create();
+        ItemsTable.create();
+        GroupsTable.create();
     }
 
     @Override

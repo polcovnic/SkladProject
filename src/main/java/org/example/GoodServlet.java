@@ -17,11 +17,6 @@ import java.util.stream.Collectors;
 public class GoodServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String jwt = req.getHeader("Authorization");
-        if (!JWT.isTokenValid(jwt)) {
-            resp.setStatus(403);
-            return;
-        }
         resp.setStatus(201);
         String jsonData = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         HashMap<String, String> jsonMap = new ObjectMapper().readValue(jsonData, HashMap.class);
@@ -42,12 +37,6 @@ public class GoodServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String jwt = req.getHeader("Authorization");
-
-        if (!JWT.isTokenValid(jwt)) {
-            resp.setStatus(403);
-            return;
-        }
         resp.setStatus(200);
         String idStr = req.getPathInfo().substring(1);
         int id = Integer.parseInt(idStr);
@@ -74,12 +63,7 @@ public class GoodServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String jwt = req.getHeader("Authorization");
 
-        if (!JWT.isTokenValid(jwt)) {
-            resp.setStatus(403);
-            return;
-        }
         resp.setStatus(204);
         String idStr = req.getPathInfo().substring(1);
         int id = Integer.parseInt(idStr);
@@ -109,12 +93,7 @@ public class GoodServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String jwt = req.getHeader("Authorization");
 
-        if (!JWT.isTokenValid(jwt)) {
-            resp.setStatus(403);
-            return;
-        }
         resp.setStatus(204);
 
         String idStr = req.getPathInfo().substring(1);
