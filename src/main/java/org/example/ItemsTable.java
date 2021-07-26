@@ -19,7 +19,17 @@ public class ItemsTable {
         }
     }
 
-
+    public static void changePrice(double price, int id) {
+        String sqlQuery = "UPDATE " + TABLE_NAME + " SET price = price + ? WHERE id = ?";
+        try {
+            PreparedStatement preparedStatement = DB.connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setDouble(1, price);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public static Integer insert(String name, String description, String manufacturer, int price, int quantity,
                                  String label, int groupId) {
         String sqlQuery = "INSERT INTO " + TABLE_NAME + "(name, description, manufacturer," +

@@ -30,4 +30,5 @@
     <listener>
         <listener-class>org.example.DBListener</listener-class>
     </listener>
+
 </web-app>

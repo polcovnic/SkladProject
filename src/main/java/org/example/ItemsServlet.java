@@ -79,6 +79,14 @@ public class ItemsServlet extends HttpServlet {
         // for update
         String jsonData = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         HashMap<String, Object> jsonMap = new ObjectMapper().readValue(jsonData, HashMap.class);
+        Double increase = (double) jsonMap.get("increase");
+        Double decrease = (double) jsonMap.get("decrease");
+        if (increase != null) {
+               ItemsTable.changePrice(increase, id);
+               return;
+        } else if(decrease != null) {
+            ItemsTable.changePrice(-decrease, id);
+        }
         String name = (String) jsonMap.get("name");
         String description = (String) jsonMap.get("description");
         String manufacturer = (String) jsonMap.get("manufacturer");
